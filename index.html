@@ -8,6 +8,7 @@
 <meta property="og:title" content="Mardon — IT Portfolio">
 <meta property="og:description" content="Мардон — IT-специалист из Ташкента: сети, автоматизация, Telegram-боты и ИИ-агенты.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://tttmardon-ui.github.io/videos/screen.jpg">
 <meta name="theme-color" content="#06070B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2306070B'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='900' font-size='34' fill='%235470FF' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -441,6 +442,39 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv.wait{opacity:1;transform:none}html{scroll-behavior:auto}}
 
+/* ---------- video player ---------- */
+.vp{position:relative;width:100%;aspect-ratio:16/9;max-width:100%;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--line);box-shadow:0 40px 80px -40px color-mix(in srgb,var(--pc,var(--acc)) 60%,transparent)}
+.vp video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vp-sub{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);width:max-content;max-width:88%;text-align:center;font:700 clamp(14px,2.3vw,24px)/1.35 var(--f-body);color:#fff;background:rgba(6,7,11,.78);backdrop-filter:blur(6px);padding:.45em .8em;border-radius:10px;border:1px solid rgba(255,255,255,.08);pointer-events:none;opacity:0;transition:opacity .2s}
+.vp-sub.on{opacity:1}
+.vp-sub i{display:inline-block;width:.5em;height:1em;background:var(--pc,var(--acc));vertical-align:-.12em;margin-left:2px;animation:blink .8s steps(1) infinite}
+.vp-big{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55));border:0;cursor:pointer;color:#fff;font:700 15px var(--f-body);padding:0}
+.vp-big span{display:flex;align-items:center;gap:12px;padding:12px 20px 12px 12px;border-radius:999px;background:rgba(6,7,11,.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);transition:transform .3s}
+.vp-big:hover span{transform:scale(1.06)}
+.vp-big b{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--pc,var(--acc));font-size:17px;padding-left:3px;box-shadow:0 0 0 0 var(--pc,var(--acc));animation:vpulse 2s infinite}
+.vp-big small{font:12px var(--f-mono);opacity:.75;margin-left:4px}
+@keyframes vpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--pc,var(--acc)) 70%,transparent)}70%{box-shadow:0 0 0 16px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.vp.playing .vp-big,.vp.paused .vp-big{display:none}
+.vp-bar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(transparent,rgba(0,0,0,.75));opacity:0;transition:opacity .3s}
+.vp.playing:hover .vp-bar,.vp.paused .vp-bar,.vp.ended .vp-bar{opacity:1}
+@media (hover:none){.vp.playing .vp-bar{opacity:1}}
+.vp-bar button{width:34px;height:34px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.4);color:#fff;cursor:pointer;font:600 13px var(--f-body);display:grid;place-items:center}
+.vp-prog{flex:1;height:5px;border-radius:5px;background:rgba(255,255,255,.2);cursor:pointer;position:relative}
+.vp-prog i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:5px;background:var(--pc,var(--acc))}
+.vp-t{font:12px var(--f-mono);color:#fff;opacity:.8;flex:none;font-variant-numeric:tabular-nums}
+.shot .vbtn{position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(8px);color:var(--ink);font:700 13px var(--f-body);cursor:pointer;transition:transform .3s,border-color .3s;z-index:2}
+.shot .vbtn:hover{transform:translateY(-2px);border-color:var(--pc)}
+.shot .vbtn b{width:30px;height:30px;border-radius:50%;background:var(--pc);color:#fff;display:grid;place-items:center;font-size:11px;padding-left:2px;animation:vpulse 2s infinite;--acc:var(--pc)}
+.shot .vbtn small{font:11px var(--f-mono);color:var(--muted)}
+.vmodal{position:fixed;inset:0;z-index:92;display:grid;place-items:center;background:rgba(3,4,8,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.vmodal.open{opacity:1;visibility:visible}
+.vmodal .in{width:min(1040px,100%);display:grid;gap:14px;transform:scale(.94);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.vmodal.open .in{transform:none}
+.vmodal .mh2{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.vmodal .mh2 b{font:600 clamp(18px,2.4vw,24px) var(--f-display)}
+.vmodal .x{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:18px;cursor:pointer;flex:none}
+.case-video{margin-bottom:28px}
+
 </style>
 </head>
 <body>
@@ -628,6 +662,36 @@ const CONTACT={
   ph1:L(`Например, Азиз`,`Masalan, Aziz`,`e.g. Aziz`),ph3:L(`Нужен бот для приёма заказов в кафе…`,`Kafe uchun buyurtma qabul qiladigan bot kerak…`,`I need a bot to take café orders…`)
 };
 
+const VID={
+ play:L(`Смотреть видео`,`Videoni ko'rish`,`Watch video`),sound:L(`Звук печати`,`Yozish ovozi`,`Typing sound`),
+ cues:{
+  screen:[[0.3,2.3,L(`MittivoyScreen — свой беспроводной экран`,`MittivoyScreen — o'z simsiz ekranimiz`,`MittivoyScreen — our own wireless screen`)],
+   [2.6,6.8,L(`Показать экран на доске? Нужны платные лицензии и адаптеры.`,`Doskaga ekran chiqarish? Pullik litsenziya va adapterlar kerak.`,`Share a screen to the board? You need paid licenses and dongles.`)],
+   [7.2,11.8,L(`Решение: программа стоит только на доске.`,`Yechim: dastur faqat doskada turadi.`,`The fix: the app lives only on the board.`)],
+   [12.2,16.8,L(`Открыл s.mittivoy.uz или AirPlay — и ты на экране.`,`s.mittivoy.uz yoki AirPlay ni ochdingiz — va siz ekrandasiz.`,`Open s.mittivoy.uz or AirPlay and you're on screen.`)],
+   [17.2,20.5,L(`Ноутбук, iPhone, Android. Ничего не нужно ставить.`,`Noutbuk, iPhone, Android. Hech narsa o'rnatish shart emas.`,`Laptop, iPhone, Android. Nothing to install.`)],
+   [21,23.8,L(`Итог: ≈ $5 000 экономии.`,`Natija: ≈ $5 000 tejaldi.`,`Result: ≈ $5,000 saved.`)]],
+  netcontrol:[[0.3,2.3,L(`NetControl — все филиалы на одном экране`,`NetControl — barcha filiallar bitta ekranda`,`NetControl — every branch on one screen`)],
+   [2.6,6.8,L(`Раньше о сбое узнавали, только когда магазин позвонит.`,`Avval nosozlik haqida faqat do'kon qo'ng'iroq qilganda bilishardi.`,`We used to learn about outages only when a store called.`)],
+   [7.2,11.8,L(`Теперь панель следит за 37 филиалами в реальном времени.`,`Endi panel 37 ta filialni real vaqtda kuzatadi.`,`Now the panel watches 37 branches in real time.`)],
+   [12.1,16.4,L(`Связь упала или кончается баланс — видно сразу.`,`Aloqa uzildi yoki balans tugayapti — darhol ko'rinadi.`,`Link down or balance running out — you see it instantly.`)],
+   [16.8,20.5,L(`Предупреждение приходит в Telegram заранее.`,`Ogohlantirish Telegram ga oldindan keladi.`,`A warning arrives in Telegram ahead of time.`)],
+   [21,23.8,L(`≈ $3 000 в год без простоев касс.`,`Kassalar to'xtamasdan yiliga ≈ $3 000.`,`≈ $3,000 a year without register downtime.`)]],
+  agent:[[0.3,2.3,L(`ИИ-агент поддержки`,`AI yordam agenti`,`AI support agent`)],
+   [2.6,6.8,L(`Десятки групп, сотни сообщений. Заявки теряются.`,`O'nlab guruhlar, yuzlab xabarlar. So'rovlar yo'qoladi.`,`Dozens of groups, hundreds of messages. Requests get lost.`)],
+   [7.2,12.8,L(`Агент отвечает сам, на узбекском или русском.`,`Agent o'zi javob beradi, o'zbek yoki rus tilida.`,`The agent replies by itself, in Uzbek or Russian.`)],
+   [13.2,17,L(`И сам создаёт тикет в ClickUp со всеми данными.`,`Va ClickUp da barcha ma'lumotlar bilan tiket ochadi.`,`And opens a ClickUp ticket with all the details.`)],
+   [17.4,20.5,L(`Специалист не ответил? Агент напишет и позвонит.`,`Mutaxassis javob bermadimi? Agent yozadi va qo'ng'iroq qiladi.`,`No reply from the specialist? The agent messages and calls.`)],
+   [21,23.8,L(`≈ 40 часов рутины в месяц — на автомате.`,`Oyiga ≈ 40 soat oddiy ish — avtomatik.`,`≈ 40 hours of routine a month — automated.`)]],
+  bots:[[0.3,2.3,L(`Боты и автоматизация на заказ`,`Buyurtma asosida botlar va avtomatlashtirish`,`Bots & automation on request`)],
+   [2.6,7.4,L(`Пишу Telegram-бота под вашу задачу.`,`Vazifangizga mos Telegram-bot yozaman.`,`I build a Telegram bot for your task.`)],
+   [7.8,13,L(`Клиент заказывает прямо в Telegram.`,`Mijoz to'g'ridan-to'g'ri Telegram da buyurtma beradi.`,`Customers order right inside Telegram.`)],
+   [13.4,17,L(`Вам приходит заказ и готовый отчёт.`,`Sizga buyurtma va tayyor hisobot keladi.`,`You get the order and a ready report.`)],
+   [17.4,20.5,L(`Бот работает 24/7 без выходных.`,`Bot 24/7 dam olishsiz ishlaydi.`,`The bot works 24/7, no days off.`)],
+   [21,23.8,L(`Минус один сотрудник на рутину.`,`Oddiy ishga bitta xodim kamroq.`,`One less employee on routine.`)]]
+ }
+};
+
 (()=>{
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const root=document.documentElement,view=document.getElementById('view');
@@ -664,7 +728,7 @@ router = Router()
 };
 
 /* ---------- helpers ---------- */
-const head=(eb,h,p)=>`<div class="wrap page-head"><span class="eyebrow scr">${esc(eb)}</span><h1 class="split-h">${h}</h1>${p?`<p class="rv">${p}</p>`:''}</div>`;
+const head=(eb,h,p)=>`<div class="wrap page-head"><span class="eyebrow scrm">${esc(eb)}</span><h1 class="split-h">${h}</h1>${p?`<p class="rv">${p}</p>`:''}</div>`;
 function nextBtn(cur){const i=ORDER.indexOf(cur),n=ORDER[(i+1)%ORDER.length];return `<div class="wrap"><button class="card next rv" data-go="${n}" style="--nc:${PAGES[n].c}"><span><small>${t(UI.next)}</small><b>${t(PAGES[n].t)}</b></span><span class="arr">→</span></button></div>`}
 const tag=a=>`<div class="tags">${a.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>`;
 const tileFx={
@@ -714,7 +778,7 @@ V.skills=()=>`${head('03 / '+t(PAGES.skills.t),t(SKILLS.h),t(PAGES.skills.d))}
   <div class="marq rev" style="margin-top:0;border-top:0"><div>${[...SKILLS.m2,...SKILLS.m2].map(x=>`<span>${x}</span>`).join('')}</div></div>
 </div>${nextBtn('skills')}`;
 
-const pjCard=p=>`<article class="card pj rv" style="--pc:${p.c}"><div class="shot">${MOCK[p.shot]()}</div><div class="info">
+const pjCard=p=>`<article class="card pj rv" style="--pc:${p.c}"><div class="shot">${MOCK[p.shot]()}<button class="vbtn" data-video="${p.id}"><b>▶</b>${t(VID.play)}<small>0:24</small></button></div><div class="info">
   <div class="tp"><span class="dom">${p.dom}</span><span class="st ${p.st}"><i></i>${t(p.st==='dev'?UI.dev:UI.live)}</span></div>
   <h3>${t(p.name)}</h3><p>${t(p.desc)}</p>
   <div class="impact"><span class="k">${t(UI.imp)}</span><b>${t(p.v)}</b><p>${t(p.vt)}</p></div>
@@ -723,7 +787,7 @@ V.projects=()=>`${head('02 / '+t(PAGES.projects.t),`${t(PAGES.projects.t)}<span 
 
 V.case=id=>{const i=PROJ.findIndex(p=>p.id===id),p=PROJ[i],n=PROJ[(i+1)%PROJ.length];return `${head(t(PAGES.projects.t)+' / 0'+(i+1),esc(t(p.name)),t(p.desc))}
 <div class="wrap">
-  <div class="card case-shot rv" style="--pc:${p.c};background:radial-gradient(circle at 30% 20%,color-mix(in srgb,${p.c} 28%,transparent),transparent 60%),var(--bg)">${MOCK[p.shot]()}</div>
+  <div class="case-video rv" style="--pc:${p.c}">${player(p.id)}</div>
   <div class="case-grid"><div class="card rv"><h3>${t(UI.problem)}</h3><p>${t(p.pr)}</p></div><div class="card rv"><h3>${t(UI.solution)}</h3><p>${t(p.so)}</p></div></div>
   <div class="results">${p.res.map(([v,l])=>`<div class="card res rv"><b>${t(v)}</b><span>${t(l)}</span></div>`).join('')}</div>
   <div class="techrow rv"><span class="l">${t(UI.tech)}</span>${tag(p.tech)}<span class="spacer"></span><button class="btn" data-go="projects">← ${t(UI.allp)}</button></div>
@@ -769,6 +833,41 @@ V.contact=()=>`${head('08 / '+t(PAGES.contact.t),t(CONTACT.h),t(PAGES.contact.d)
   </form>
 </div>`;
 
+/* ---------- video player ---------- */
+const player=id=>`<div class="vp" data-vp="${id}"><video src="videos/${id}.mp4" poster="videos/${id}.jpg" playsinline muted preload="metadata"></video><div class="vp-sub"><span></span><i></i></div><button class="vp-big" aria-label="${t(VID.play)}"><span><b>▶</b>${t(VID.play)}<small>0:24</small></span></button><div class="vp-bar"><button class="vp-pp" aria-label="Play/Pause">❚❚</button><div class="vp-prog"><i></i></div><span class="vp-t">0:00</span><button class="vp-snd" aria-label="${t(VID.sound)}" title="${t(VID.sound)}">${soundOn?'🔊':'🔇'}</button></div></div>`;
+let soundOn=true,actx=null;
+function clickSound(){if(!soundOn)return;try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();
+  const now=actx.currentTime,len=.03,buf=actx.createBuffer(1,actx.sampleRate*len,actx.sampleRate),d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,4);
+  const s=actx.createBufferSource();s.buffer=buf;const f=actx.createBiquadFilter();f.type='bandpass';f.frequency.value=1800+Math.random()*1600;f.Q.value=1.2;const gn=actx.createGain();gn.gain.value=.22+Math.random()*.1;s.connect(f).connect(gn).connect(actx.destination);s.start(now)}catch(e){}}
+const players=new Set();
+function stopAllPlayers(){players.forEach(p=>p.stop());players.clear()}
+function initPlayer(el){if(!el||el._vp)return;const id=el.dataset.vp,v=el.querySelector('video'),sub=el.querySelector('.vp-sub'),span=sub.querySelector('span'),bar=el.querySelector('.vp-prog i'),tm=el.querySelector('.vp-t'),pp=el.querySelector('.vp-pp'),snd=el.querySelector('.vp-snd');
+  const cues=VID.cues[id];let shown=-1,raf=0;
+  const fmt=s=>'0:'+String(Math.floor(s)).padStart(2,'0');
+  function tick(){const ct=v.currentTime;const c=cues.find(q=>ct>=q[0]&&ct<q[1]);
+    if(c){const full=t(c[2]),n=Math.min(full.length,Math.floor((ct-c[0])*34));const key=cues.indexOf(c)*1000+n;
+      if(key!==shown){const prev=shown;shown=key;span.textContent=full.slice(0,n);if(!v.paused&&n>0&&Math.floor(prev/1000)===cues.indexOf(c)&&n>prev%1000&&full[n-1]!==' ')clickSound();else if(!v.paused&&n>0&&Math.floor(prev/1000)!==cues.indexOf(c))clickSound()}
+      sub.classList.toggle('on',n>0);sub.querySelector('i').style.display=n<full.length?'':'none'}
+    else{sub.classList.remove('on');shown=-1}
+    bar.style.width=(v.duration?ct/v.duration*100:0)+'%';tm.textContent=fmt(ct);
+    if(!v.paused)raf=requestAnimationFrame(tick)}
+  const play=()=>{actx=actx||(()=>{try{return new (window.AudioContext||window.webkitAudioContext)()}catch(e){return null}})();if(actx&&actx.state==='suspended')actx.resume();
+    if(v.ended)v.currentTime=0;v.play().then(()=>{el.classList.add('playing');el.classList.remove('paused','ended');pp.textContent='❚❚';cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)}).catch(()=>{})};
+  const pause=()=>{v.pause();el.classList.remove('playing');el.classList.add('paused');pp.textContent='▶'};
+  el.querySelector('.vp-big').onclick=play;
+  pp.onclick=()=>v.paused?play():pause();
+  v.addEventListener('click',()=>v.paused?play():pause());
+  v.addEventListener('ended',()=>{el.classList.remove('playing');el.classList.add('ended');pp.textContent='↺';tick()});
+  el.querySelector('.vp-prog').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();v.currentTime=(e.clientX-r.left)/r.width*(v.duration||24);shown=-1;tick()};
+  snd.onclick=()=>{soundOn=!soundOn;document.querySelectorAll('.vp-snd').forEach(b=>b.textContent=soundOn?'🔊':'🔇')};
+  el._vp={play,stop(){v.pause();cancelAnimationFrame(raf)}};players.add(el._vp);
+}
+const vmodal=document.createElement('div');vmodal.className='vmodal';vmodal.setAttribute('role','dialog');vmodal.setAttribute('aria-modal','true');document.body.appendChild(vmodal);
+function openVideo(id){const p=PROJ.find(x=>x.id===id);vmodal.innerHTML=`<div class="in" style="--pc:${p.c}"><div class="mh2"><b>${t(p.name)}</b><button class="x" aria-label="Close">✕</button></div>${player(id)}</div>`;
+  vmodal.classList.add('open');const el=vmodal.querySelector('.vp');initPlayer(el);el._vp.play();
+  vmodal.querySelector('.x').onclick=closeVideo;vmodal.onclick=e=>{if(e.target===vmodal)closeVideo()}}
+function closeVideo(){vmodal.classList.remove('open');const el=vmodal.querySelector('.vp');if(el&&el._vp){el._vp.stop();players.delete(el._vp)}setTimeout(()=>{if(!vmodal.classList.contains('open'))vmodal.innerHTML=''},400)}
+
 /* ---------- text effects ---------- */
 function splitWords(el,base=0){
   const walk=(node,acc)=>{[...node.childNodes].forEach(n=>{if(n.nodeType===3){const parts=n.textContent.split(/(\s+)/);const frag=document.createDocumentFragment();parts.forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){frag.append(p);return}const w=document.createElement('span');w.className='w';const s=document.createElement('span');s.textContent=p;s.style.animationDelay=(base+acc.i++*70)+'ms';w.append(s);frag.append(w)});n.replaceWith(frag)}else if(n.nodeType===1)walk(n,acc)})};
@@ -787,7 +886,7 @@ function reveal(){
   let k=0;
   view.querySelectorAll('.rv').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<innerHeight){el.style.setProperty('--d',(120+k++*70)+'ms');el.classList.add('in')}else{el.classList.add('wait');io.observe(el)}});
   view.querySelectorAll('.split-h').forEach((el,i)=>splitWords(el,i*150));
-  view.querySelectorAll('.scr').forEach(scramble);
+  view.querySelectorAll(".scrm").forEach(scramble);
 }
 function counters(){if(reduce)return;view.querySelectorAll('[data-count]').forEach(el=>{const raw=el.dataset.count,m=raw.match(/(\D*)(\d+)/);if(!m)return;const pre=m[1],end=+m[2],t0=performance.now();
   (function f(tm){const p=Math.min(1,(tm-t0)/1500),v=Math.round(end*(1-Math.pow(1-p,3)));el.textContent=pre+(end>=1000?v.toLocaleString('ru-RU'):v);if(p<1)requestAnimationFrame(f)})(t0)})}
@@ -859,12 +958,13 @@ function render(r,keepScroll){
   cur=r;const isCase=r.startsWith('case-'),pid=isCase?r.slice(5):null,pg=PAGES[isCase?'projects':r],proj=isCase?PROJ.find(p=>p.id===pid):null;
   root.style.setProperty('--acc',proj?proj.c:pg.c);root.style.setProperty('--acc2',pg.c2);
   fxMode=pg.fx;
+  stopAllPlayers();
   view.innerHTML=isCase?V.case(pid):V[r]();
   document.getElementById('back').hidden=r==='home';
   document.getElementById('crumb').innerHTML=r==='home'?'':`~/<b>${isCase?esc(t(proj.name)):t(pg.t)}</b>`;
   document.title=(r==='home'?'Mardon':(isCase?t(proj.name):t(pg.t))+' · Mardon')+' — IT Portfolio';
   if(!keepScroll)window.scrollTo(0,0);
-  reveal();counters();tilt();terminal();quotes();form();bindCopy(view);
+  reveal();counters();tilt();terminal();quotes();form();bindCopy(view);view.querySelectorAll('.vp').forEach(initPlayer);
   if(window.__fxRedraw)__fxRedraw();
 }
 function nav(r){r=routeOf(r);if(r===cur)return;closeMenu();
@@ -872,7 +972,7 @@ function nav(r){r=routeOf(r);if(r===cur)return;closeMenu();
   if(reduce){render(r);return}
   view.classList.add('out');setTimeout(()=>{render(r);requestAnimationFrame(()=>view.classList.remove('out'))},320)}
 addEventListener('hashchange',()=>{const r=routeOf(location.hash);if(r===cur)return;if(reduce){render(r);return}view.classList.add('out');setTimeout(()=>{render(r);requestAnimationFrame(()=>view.classList.remove('out'))},280)});
-document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(!g)return;e.preventDefault();if(g.dataset.svc)pickedSvc=g.dataset.svc;nav(g.dataset.go)});
+document.addEventListener('click',e=>{const vb=e.target.closest('[data-video]');if(vb){e.preventDefault();openVideo(vb.dataset.video);return}const g=e.target.closest('[data-go]');if(!g)return;e.preventDefault();if(g.dataset.svc)pickedSvc=g.dataset.svc;nav(g.dataset.go)});
 document.getElementById('logo').onclick=()=>nav('home');
 document.getElementById('back').onclick=()=>nav(cur&&cur.startsWith('case-')?'projects':'home');
 
@@ -882,7 +982,7 @@ function buildMenu(){document.getElementById('mlist').innerHTML=['home',...ORDER
 function closeMenu(){menu.classList.remove('open')}
 document.getElementById('menuBtn').onclick=()=>{buildMenu();menu.classList.add('open');setTimeout(()=>document.getElementById('menuX').focus(),50)};
 document.getElementById('menuX').onclick=closeMenu;
-addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();closeVideo()}});
 
 /* ---------- language ---------- */
 function setLang(l){lang=l;root.lang=l;document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
