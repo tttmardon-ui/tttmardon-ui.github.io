@@ -328,6 +328,13 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1
 .res span{color:var(--muted);font-size:15px}
 .res:first-child{background:color-mix(in srgb,var(--ok) 9%,var(--surface));border-color:color-mix(in srgb,var(--ok) 32%,transparent)}
 .res:first-child b{color:var(--ok)}
+.pros{padding:30px;display:grid;gap:18px;margin-bottom:28px}
+.pros h3{font:600 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.pros ul{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px;margin:0;padding:0}
+.pros li{position:relative;padding-left:26px;font-size:16px;line-height:1.5}
+.pros li::before{content:"✓";position:absolute;left:0;top:0;color:var(--ok);font-weight:700}
+.plinks{display:flex;gap:12px;flex-wrap:wrap}
+@media (max-width:820px){.pros ul{grid-template-columns:1fr}.pros{padding:22px}}
 .techrow{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:40px}
 .techrow span.l{font:600 12px var(--f-mono);letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
 @media (max-width:820px){.case-grid,.results{grid-template-columns:1fr}.case-shot{padding:22px;min-height:0}}
@@ -496,7 +503,7 @@ const L=(ru,uz,en)=>({ru,uz,en});
 const PAGES={
   home:{c:"#5470FF",c2:"#141E6B",fx:"net",t:L(`Главная`,`Bosh sahifa`,`Home`)},
   about:{c:"#C4304A",c2:"#4A0D1C",fx:"orbs",t:L(`Обо мне`,`Men haqimda`,`About`),d:L(`Кто я и чем занимаюсь`,`Kimman va nima qilaman`,`Who I am and what I do`)},
-  projects:{c:"#3D63FF",c2:"#0E1C66",fx:"grid",t:L(`Проекты`,`Loyihalar`,`Projects`),d:L(`4 проекта и что они дают бизнесу`,`4 loyiha va ularning biznesga foydasi`,`4 projects and their business impact`)},
+  projects:{c:"#3D63FF",c2:"#0E1C66",fx:"grid",t:L(`Проекты`,`Loyihalar`,`Projects`),d:L(`5 проектов и что они дают бизнесу`,`5 loyiha va ularning biznesga foydasi`,`4 projects and their business impact`)},
   skills:{c:"#2E7BF0",c2:"#06224F",fx:"rain",t:L(`Навыки`,`Ko'nikmalar`,`Skills`),d:L(`Сети, Python, Linux и ИИ`,`Tarmoq, Python, Linux va AI`,`Networks, Python, Linux and AI`)},
   services:{c:"#B8324A",c2:"#3D0A16",fx:"waves",t:L(`Услуги`,`Xizmatlar`,`Services`),d:L(`Что могу сделать для вас и сколько стоит`,`Siz uchun nima qila olaman va narxi`,`What I can build for you and the price`)},
   experience:{c:"#6A5CFF",c2:"#1C1460",fx:"rise",t:L(`Опыт`,`Tajriba`,`Experience`),d:L(`Где работал и как работаю`,`Qayerda ishladim va qanday ishlayman`,`Where I work and how I work`)},
@@ -512,7 +519,8 @@ const UI={
   dev:L(`в разработке`,`ishlab chiqilmoqda`,`in development`),live:L(`принимаю заказы`,`buyurtma qabul qilaman`,`taking orders`),
   imp:L(`ЧТО ЭТО ДАЁТ`,`BU NIMA BERADI`,`BUSINESS IMPACT`),copied:L(`Скопировано`,`Nusxa olindi`,`Copied`),copy:L(`Копировать`,`Nusxalash`,`Copy`),
   problem:L(`Проблема`,`Muammo`,`Problem`),solution:L(`Решение`,`Yechim`,`Solution`),result:L(`Результат`,`Natija`,`Result`),tech:L(`Технологии`,`Texnologiyalar`,`Tech`),
-  allp:L(`Все проекты`,`Barcha loyihalar`,`All projects`)
+  allp:L(`Все проекты`,`Barcha loyihalar`,`All projects`),
+  pros:L(`Плюсы для бизнеса`,`Biznes uchun afzalliklar`,`Business benefits`),demo:L(`Открыть демо`,`Demoni ochish`,`Open demo`),code:L(`Код на GitHub`,`GitHub dagi kod`,`Code on GitHub`)
 };
 
 const HOME={
@@ -525,7 +533,7 @@ const HOME={
   hint:L(`Попробуй ввести: help`,`Yozib ko'ring: help`,`Try typing: help`),
   stats:[["37",L(`магазинов на поддержке`,`do'kon qo'llab-quvvatlanadi`,`stores supported`)],["4",L(`своих проекта`,`ta o'z loyiham`,`own projects`)],["≈$5000",L(`сэкономлено одним проектом`,`bitta loyiha bilan tejaldi`,`saved by one project`)],["3",L(`языка: UZ · RU · EN`,`til: UZ · RU · EN`,`languages: UZ · RU · EN`)]],
   now:L(`Сейчас работаю над`,`Hozir ustida ishlayapman`,`Currently working on`),
-  nowItems:[["MittivoyScreen","#3D63FF",L(`тестирую AirPlay на смарт-доске`,`smart-doskada AirPlay ni sinayapman`,`testing AirPlay on the smart board`)],["NetControl","#2E7BF0",L(`подключаю точки UniFi всех филиалов`,`barcha filiallarning UniFi nuqtalarini ulayapman`,`connecting UniFi access points for every branch`)],[L(`ИИ-агент`,`AI agent`,`AI agent`),"#C4304A",L(`связываю Telegram-группы с ClickUp`,`Telegram guruhlarini ClickUp bilan bog'layapman`,`linking Telegram groups with ClickUp`)]],
+  nowItems:[["StoreSense","#17B890",L(`готовлю пилот ИИ-аналитики по камерам`,`kameralar orqali AI tahlil sinovini tayyorlayapman`,`preparing an AI camera-analytics pilot`)],["MittivoyScreen","#3D63FF",L(`тестирую AirPlay на смарт-доске`,`smart-doskada AirPlay ni sinayapman`,`testing AirPlay on the smart board`)],["NetControl","#2E7BF0",L(`подключаю точки UniFi всех филиалов`,`barcha filiallarning UniFi nuqtalarini ulayapman`,`connecting UniFi access points for every branch`)],[L(`ИИ-агент`,`AI agent`,`AI agent`),"#C4304A",L(`связываю Telegram-группы с ClickUp`,`Telegram guruhlarini ClickUp bilan bog'layapman`,`linking Telegram groups with ClickUp`)]],
   tilesH:L(`Куда дальше?`,`Qayerga o'tamiz?`,`Where to next?`),tilesP:L(`Выберите раздел`,`Bo'limni tanlang`,`Pick a section`),
   tiles:{
     about:L(`Фото, история и Mittivoy`,`Rasm, tarix va Mittivoy`,`Photo, story and Mittivoy`),
@@ -568,6 +576,20 @@ const SKILLS={
 };
 
 const PROJ=[
+ {id:"storesense",c:"#17B890",name:L(`StoreSense`,`StoreSense`,`StoreSense`),dom:"AI · cameras · Ollama",st:"dev",shot:"dash",
+  desc:L(`ИИ-аналитика магазина по уже установленным камерам: считает посетителей, показывает горячие зоны отделов, находит пустые полки и оценивает, как быстро продавцы подходят к покупателям.`,`Mavjud kameralar orqali do'kon uchun AI tahlil: mijozlarni sanaydi, bo'limlarning issiq zonalarini ko'rsatadi, bo'sh javonlarni topadi va sotuvchilar mijozga qanchalik tez yaqinlashishini baholaydi.`,`AI store analytics on the cameras already installed: counts visitors, shows department hot zones, spots empty shelves and measures how fast staff reach customers.`),
+  v:L(`≈ $15 000 / год`,`≈ $15 000 / yil`,`≈ $15,000 / year`),vt:L(`примерно столько стоила бы подписка на готовую систему подсчёта посетителей для 37 филиалов. Здесь бесплатные программы и камеры, которые уже есть.`,`37 ta filial uchun tayyor tashrif hisoblash tizimiga obuna taxminan shuncha turardi. Bu yerda bepul dasturlar va mavjud kameralar.`,`roughly what a ready-made footfall analytics subscription for 37 branches would cost. This runs on free software and existing cameras.`),
+  pr:L(`Руководство не знает точно, сколько людей заходит в каждый филиал, какие отделы привлекают покупателей, где люди уходят без консультации и когда пустеют полки. Решения о выкладке и графике продавцов принимаются на глаз.`,`Rahbariyat har bir filialga qancha odam kirishini, qaysi bo'limlar mijozlarni jalb qilishini, qayerda odamlar maslahatsiz ketishini va javonlar qachon bo'shashini aniq bilmaydi. Tovar joylashuvi va sotuvchilar jadvali taxminan belgilanadi.`,`Management doesn't know exactly how many people enter each branch, which departments draw shoppers, where people leave without help, or when shelves run empty. Merchandising and staff schedules are set by gut feeling.`),
+  so:L(`Камеры, которые уже висят в магазинах, подключаются к локальному серверу. Нейросеть считает входы и выходы, время в каждом отделе и подходы продавцов, раз в 15 минут проверяет полки. Каждый вечер локальная модель в Ollama пишет короткий отчёт в Telegram. Видео и лица не сохраняются, только цифры.`,`Do'konlardagi mavjud kameralar mahalliy serverga ulanadi. Neyrotarmoq kirish va chiqishlarni, har bir bo'limdagi vaqtni va sotuvchilarning yaqinlashishini sanaydi, har 15 daqiqada javonlarni tekshiradi. Har kecha Ollama dagi mahalliy model Telegramga qisqa hisobot yozadi. Video va yuzlar saqlanmaydi, faqat raqamlar.`,`Cameras already hanging in the stores connect to a local server. A neural network counts entries and exits, time in each department and staff approaches, and checks shelves every 15 minutes. Each evening a local model in Ollama writes a short report to Telegram. No video or faces are stored, only numbers.`),
+  res:[[L(`≈ $15 000 / год`,`≈ $15 000 / yil`,`≈ $15,000 / yr`),L(`экономия против готовой подписки`,`tayyor obunaga nisbatan tejash`,`saved vs a ready-made subscription`)],[L(`0 сум`,`0 so'm`,`$0`),L(`на внедрение: свои камеры и бесплатный софт`,`joriy qilishga: o'z kameralar va bepul dastur`,`to roll out: own cameras, free software`)],[L(`15 мин`,`15 daqiqa`,`15 min`),L(`проверка полок с алертом в Telegram`,`javonlarni tekshirish va Telegram xabari`,`shelf checks with a Telegram alert`)]],
+  pros:[L(`Работает на уже установленных камерах, новое оборудование не нужно`,`Mavjud kameralarda ishlaydi, yangi uskuna kerak emas`,`Runs on cameras already installed, no new hardware`),
+   L(`Реальный трафик и часы пик: график продавцов по факту, а не на глаз`,`Haqiqiy oqim va gavjum soatlar: sotuvchilar jadvali taxminan emas, faktga ko'ra`,`Real traffic and peak hours: staff schedules based on facts`),
+   L(`Тепловая карта отделов: выкладка товара по данным`,`Bo'limlar issiqlik xaritasi: tovar joylashuvi ma'lumotlarga ko'ra`,`Department heatmap: merchandising driven by data`),
+   L(`Пустая полка сразу превращается в сообщение в Telegram, меньше упущенных продаж`,`Bo'sh javon darhol Telegram xabariga aylanadi, kamroq savdo yo'qotiladi`,`An empty shelf becomes a Telegram alert right away, fewer lost sales`),
+   L(`Доля покупателей без консультации по каждому отделу: контроль сервиса`,`Har bir bo'limda maslahatsiz qolgan mijozlar ulushi: xizmat nazorati`,`Share of shoppers left without help per department: service control`),
+   L(`Всё локально: видео и лица не сохраняются, данные не уходят в облако`,`Hammasi mahalliy: video va yuzlar saqlanmaydi, ma'lumot bulutga chiqmaydi`,`Fully local: no video or faces stored, nothing leaves for the cloud`)],
+  links:[["demo","https://tttmardon-ui.github.io/storesense/"],["code","https://github.com/tttmardon-ui/storesense"]],
+  tech:["Python","YOLO","Ollama","Docker","Starlette","Telegram API"]},
  {id:"screen",c:"#3D63FF",name:L(`MittivoyScreen`,`MittivoyScreen`,`MittivoyScreen`),dom:"s.mittivoy.uz",st:"dev",shot:"board",
   desc:L(`Беспроводной показ экрана на смарт-доску, своя замена eShare Pro. Программа стоит только на доске, на ноутбуки ничего ставить не нужно.`,`Smart-doskaga simsiz ekran uzatish, eShare Pro ning o'z muqobili. Dastur faqat doskada turadi, noutbuklarga hech narsa o'rnatish shart emas.`,`Wireless screen sharing to a smart board, an in-house replacement for eShare Pro. It runs only on the board; nothing to install on laptops.`),
   v:"≈ $5 000",vt:L(`экономии на платных лицензиях и беспроводных адаптерах. Компания не зависит от чужого софта.`,`pullik litsenziya va simsiz adapterlarni tejash. Kompaniya begona dasturga bog'liq emas.`,`saved on paid licenses and wireless dongles. No dependency on third-party software.`),
@@ -779,6 +801,7 @@ V.case=id=>{const i=PROJ.findIndex(p=>p.id===id),p=PROJ[i],n=PROJ[(i+1)%PROJ.len
   <div class="case-video rv" style="--pc:${p.c}">${player(p.id)}</div>
   <div class="case-grid"><div class="card rv"><h3>${t(UI.problem)}</h3><p>${t(p.pr)}</p></div><div class="card rv"><h3>${t(UI.solution)}</h3><p>${t(p.so)}</p></div></div>
   <div class="results">${p.res.map(([v,l])=>`<div class="card res rv"><b>${t(v)}</b><span>${t(l)}</span></div>`).join('')}</div>
+  ${p.pros?`<div class="card pros rv"><h3>${t(UI.pros)}</h3><ul>${p.pros.map(x=>`<li>${t(x)}</li>`).join('')}</ul>${p.links?`<div class="plinks">${p.links.map(([k,u],j)=>`<a class="btn${j?'':' pri'}" href="${u}" target="_blank" rel="noopener"${j?'':` style="--acc:${p.c};background:${p.c};border-color:${p.c}"`}>${t(UI[k])} ↗</a>`).join('')}</div>`:''}</div>`:''}
   <div class="techrow rv"><span class="l">${t(UI.tech)}</span>${tag(p.tech)}<span class="spacer"></span><button class="btn" data-go="projects">← ${t(UI.allp)}</button></div>
   <button class="card next rv" data-go="case-${n.id}" style="--nc:${n.c}"><span><small>${t(UI.nextp)}</small><b>${t(n.name)}</b></span><span class="arr">→</span></button>
 </div>`};
@@ -824,7 +847,7 @@ V.contact=()=>`${head('08 / '+t(PAGES.contact.t),t(CONTACT.h),t(PAGES.contact.d)
 
 /* ---------- video player (autoplay, no play button) ---------- */
 const sndLabel=()=>soundOn?`🔊`:`🔇 ${t(VID.on)}`;
-const player=id=>`<div class="vp${id==='skills'?' music':''}" data-vp="${id}"><video src="videos/${id}.mp4" poster="videos/${id}.jpg" playsinline muted loop preload="auto"></video><div class="vp-sub"><span></span><i></i></div><button class="vp-snd${soundOn?' on':''}" aria-label="${t(VID.sound)}">${sndLabel()}</button><div class="vp-line"><i></i></div></div>`;
+const player=id=>`<div class="vp${id==='skills'||id==='storesense'?' music':''}" data-vp="${id}"><video src="videos/${id}.mp4" poster="videos/${id}.jpg" playsinline muted loop preload="auto"></video><div class="vp-sub"><span></span><i></i></div><button class="vp-snd${soundOn?' on':''}" aria-label="${t(VID.sound)}">${sndLabel()}</button><div class="vp-line"><i></i></div></div>`;
 let soundOn=false,actx=null;
 function audio(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume()}catch(e){}}
 function clickSound(){if(!soundOn||!actx||actx.state!=='running')return;try{
